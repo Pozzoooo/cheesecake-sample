@@ -11,7 +11,8 @@
     <dimen name="text_bigger">18sp</dimen>
 
     <!--Fixed sizes-->
-    <dimen name="size_imageList">100dp</dimen>
+    <dimen name="size_imageList">120dp</dimen>
+    <dimen name="size_imageDetails">240dp</dimen>
 
     <!--Margin-->
     <dimen name="margin_std">4dp</dimen>

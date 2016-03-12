@@ -7,8 +7,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import pozzo.apps.cheesecake.R;
+import pozzo.apps.cheesecake.model.Article;
 
 /**
  * This is show an article detail.
@@ -21,7 +26,8 @@ public class ArticleDetailFragment extends Fragment {
 	 * The fragment argument representing the item ID that this fragment
 	 * represents.
 	 */
-	public static final String ARG_ITEM_ID = "item_id";
+	public static final String PARAM_ARTICLE = "article";
+	private Article article;
 
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
@@ -34,12 +40,16 @@ public class ArticleDetailFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		if (getArguments().containsKey(ARG_ITEM_ID)) {
+		Bundle arguments = getArguments();
+		if (arguments.containsKey(PARAM_ARTICLE)) {
+			article = arguments.getParcelable(PARAM_ARTICLE);
 
-			Activity activity = this.getActivity();
-			CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
+			Activity activity = getActivity();
+			CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbarLayout);
 			if (appBarLayout != null) {
-				appBarLayout.setTitle("");
+				appBarLayout.setTitle(article.getTitle());
+				ImageView iParallax = (ImageView) appBarLayout.findViewById(R.id.iParallax);
+				ImageLoader.getInstance().displayImage(article.getImage(), iParallax);
 			}
 		}
 	}
@@ -49,10 +59,7 @@ public class ArticleDetailFragment extends Fragment {
 							 Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.article_detail, container, false);
 
-		// Show the dummy content as text in a TextView.
-//		if (mItem != null) {
-//			((TextView) rootView.findViewById(R.id.article_detail)).setText("");
-//		}
+		((TextView) rootView.findViewById(R.id.article_detail)).setText(article.getContent());
 
 		return rootView;
 	}

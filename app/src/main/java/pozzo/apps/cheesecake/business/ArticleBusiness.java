@@ -47,4 +47,14 @@ public class ArticleBusiness {
 		}
 		return false;
 	}
+
+	/**
+	 * Mark given article as read now.
+	 *
+	 * @param article read.
+	 */
+	public void readArticle(Article article) {
+		article.setReadAt(System.currentTimeMillis());
+		article.save();
+	}
 }

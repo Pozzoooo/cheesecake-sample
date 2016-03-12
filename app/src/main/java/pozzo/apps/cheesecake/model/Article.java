@@ -1,5 +1,7 @@
 package pozzo.apps.cheesecake.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.provider.BaseColumns;
 
 import com.activeandroid.annotation.Column;
@@ -13,7 +15,7 @@ import com.google.gson.annotations.SerializedName;
  * @since 12/03/16
  */
 @Table(name = "Article", id = BaseColumns._ID)
-public class Article extends BaseModel {
+public class Article extends BaseModel implements Parcelable {
 	@SerializedName("title")
 	@Column(name = "title")
 	private String title;
@@ -37,6 +39,12 @@ public class Article extends BaseModel {
 	@SerializedName("image")
 	@Column(name = "image")
 	private String image;
+
+	@Column(name = "readAt")
+	private long readAt;
+
+	public Article() {
+	}
 
 	public String getTitle() {
 		return title;
@@ -85,4 +93,50 @@ public class Article extends BaseModel {
 	public void setImage(String image) {
 		this.image = image;
 	}
+
+	public long getReadAt() {
+		return readAt;
+	}
+
+	public void setReadAt(long readAt) {
+		this.readAt = readAt;
+	}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(title);
+		dest.writeString(website);
+		dest.writeString(authors);
+		dest.writeString(date);
+		dest.writeString(content);
+		dest.writeString(image);
+		dest.writeLong(readAt);
+	}
+
+	protected Article(Parcel in) {
+		title = in.readString();
+		website = in.readString();
+		authors = in.readString();
+		date = in.readString();
+		content = in.readString();
+		image = in.readString();
+		readAt = in.readLong();
+	}
+
+	public static final Creator<Article> CREATOR = new Creator<Article>() {
+		@Override
+		public Article createFromParcel(Parcel in) {
+			return new Article(in);
+		}
+
+		@Override
+		public Article[] newArray(int size) {
+			return new Article[size];
+		}
+	};
 }
