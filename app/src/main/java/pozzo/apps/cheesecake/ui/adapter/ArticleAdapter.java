@@ -41,7 +41,13 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
 		holder.eTitle.setText(article.getTitle());
 		holder.eAuthors.setText(article.getAuthors());
 		holder.eDate.setText(article.getDate());
-		ImageLoader.getInstance().displayImage(article.getImage(), holder.iImage);
+
+		if(article.getImage() == null || article.getImage().isEmpty()) {
+			holder.iImage.setVisibility(View.GONE);
+		} else {
+			holder.iImage.setVisibility(View.VISIBLE);
+			ImageLoader.getInstance().displayImage(article.getImage(), holder.iImage);
+		}
 	}
 
 	@Override
