@@ -116,6 +116,7 @@ public class Article extends BaseModel implements Parcelable {
 		dest.writeString(content);
 		dest.writeString(image);
 		dest.writeLong(readAt);
+		dest.writeLong(getId());
 	}
 
 	protected Article(Parcel in) {
@@ -126,6 +127,7 @@ public class Article extends BaseModel implements Parcelable {
 		content = in.readString();
 		image = in.readString();
 		readAt = in.readLong();
+		setId(in.readLong());
 	}
 
 	public static final Creator<Article> CREATOR = new Creator<Article>() {

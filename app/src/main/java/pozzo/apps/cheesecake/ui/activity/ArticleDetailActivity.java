@@ -50,13 +50,18 @@ public class ArticleDetailActivity extends AppCompatActivity {
 					.commit();
 		}
 
-		FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-		fab.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				new ArticleBusiness().readArticle(article);
-			}
-		});
+		final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+		if (fab != null) {
+			fab.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					new ArticleBusiness().readArticle(article);
+					fab.setVisibility(View.GONE);
+				}
+			});
+			if(article.getReadAt() != 0)
+				fab.setVisibility(View.GONE);
+		}
 	}
 
 	@Override

@@ -47,6 +47,7 @@ public class ArticleDetailFragment extends Fragment {
 			Activity activity = getActivity();
 			CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbarLayout);
 			if (appBarLayout != null) {
+				//TODO Title will not show completely... where should I put it?
 				appBarLayout.setTitle(article.getTitle());
 				ImageView iParallax = (ImageView) appBarLayout.findViewById(R.id.iParallax);
 				ImageLoader.getInstance().displayImage(article.getImage(), iParallax);

@@ -47,7 +47,6 @@ public class ArticleListActivity extends AppCompatActivity {
 
 		recyclerView = (RecyclerView) findViewById(R.id.article_list);
 		srRefresh = (SwipeRefreshLayout) findViewById(R.id.srRefresh);
-		setupRecyclerView();
 		srRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 			@Override
 			public void onRefresh() {
@@ -62,6 +61,13 @@ public class ArticleListActivity extends AppCompatActivity {
 			// activity should be in two-pane mode.
 			mTwoPane = true;
 		}
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+		//So we make sure all data is localy fresh
+		setupRecyclerView();
 	}
 
 	/**
