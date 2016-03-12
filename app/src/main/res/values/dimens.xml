@@ -15,4 +15,6 @@
 
     <!--Margin-->
     <dimen name="margin_std">4dp</dimen>
+    <dimen name="margin_big">8dp</dimen>
+    <dimen name="margin_bigger">16dp</dimen>
 </resources>
