@@ -4,6 +4,9 @@
 
     <!--Words-->
     <string name="by">By</string>
+    <string name="sortByAuthor">Sort by author</string>
+    <string name="sortByTitle">Sort by title</string>
+    <string name="sortByDate">Sort by date</string>
 
     <!--Titles-->
     <string name="title_articleDetail">Article Detail</string>

@@ -7,11 +7,15 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import pozzo.apps.cheesecake.R;
@@ -35,6 +39,8 @@ public class ArticleListActivity extends AppCompatActivity {
 	private boolean isTwoPanels;
 
 	private ArticleBusiness articleBusiness;
+	private ArticleAdapter adapter;
+	private List<Article> articles;
 
 	private RecyclerView recyclerView;
 	private SwipeRefreshLayout srRefresh;
@@ -79,6 +85,51 @@ public class ArticleListActivity extends AppCompatActivity {
 		setupRecyclerView();
 	}
 
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.mSortByAuthor:
+			case R.id.mSortByDate:
+			case R.id.mSortByTitle:
+				sort(item.getItemId());
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
+
+	/**
+	 * Sort article list.
+	 */
+	private void sort(final int sortField) {
+		if(articles == null || articles.isEmpty())
+			return;//Wont sort nothing
+
+		Collections.sort(articles, new Comparator<Article>() {
+			@Override
+			public int compare(Article lhs, Article rhs) {
+				//Dont blame on me, I know its bad performance to do it here TODO improve perfs
+				switch (sortField) {
+					case R.id.mSortByAuthor:
+						return lhs.getAuthors().compareTo(rhs.getAuthors());
+					case R.id.mSortByDate:
+						return lhs.getDate().compareTo(rhs.getDate());
+					case R.id.mSortByTitle:
+						return lhs.getTitle().compareTo(rhs.getTitle());
+					default:
+						return 0;
+				}
+			}
+		});
+		adapter.notifyDataSetChanged();
+	}
+
 	/**
 	 * Initi recyclerview.
 	 */
@@ -91,13 +142,15 @@ public class ArticleListActivity extends AppCompatActivity {
 
 			@Override
 			protected void onPostExecute(List<Article> articles) {
+				ArticleListActivity.this.articles = articles;
 				if(articles == null || articles.isEmpty()) {
 					lEmpty.setVisibility(View.VISIBLE);
 					refresh();
 				} else {
 					lEmpty.setVisibility(View.GONE);
-					recyclerView.setAdapter(new ArticleAdapter(
-							articles, isTwoPanels ? showDetailsOnSide : openDetailsActivity));
+					adapter = new ArticleAdapter(
+							articles, isTwoPanels ? showDetailsOnSide : openDetailsActivity);
+					recyclerView.setAdapter(adapter);
 				}
 			}
 		}.execute();
