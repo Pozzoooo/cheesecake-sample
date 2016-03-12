@@ -3,5 +3,16 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="app_bar_height">200dp</dimen>
     <dimen name="item_width">200dp</dimen>
-    <dimen name="text_margin">16dp</dimen>
+
+    <!--Text-->
+    <dimen name="text_small">12sp</dimen>
+    <dimen name="text_std">14sp</dimen>
+    <dimen name="text_big">16sp</dimen>
+    <dimen name="text_bigger">18sp</dimen>
+
+    <!--Fixed sizes-->
+    <dimen name="size_imageList">100dp</dimen>
+
+    <!--Margin-->
+    <dimen name="margin_std">4dp</dimen>
 </resources>

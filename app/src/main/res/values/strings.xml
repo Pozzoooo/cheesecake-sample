@@ -1,4 +1,10 @@
 <resources>
+    <!--System-->
     <string name="app_name">Cheesecake Sample</string>
-    <string name="title_article_detail">Article Detail</string>
+
+    <!--Words-->
+    <string name="by">By</string>
+
+    <!--Titles-->
+    <string name="title_articleDetail">Article Detail</string>
 </resources>

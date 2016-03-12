@@ -21,7 +21,7 @@
         </activity>
         <activity
             android:name=".ui.activity.ArticleDetailActivity"
-            android:label="@string/title_article_detail"
+            android:label="@string/title_articleDetail"
             android:parentActivityName=".ui.activity.ArticleListActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
