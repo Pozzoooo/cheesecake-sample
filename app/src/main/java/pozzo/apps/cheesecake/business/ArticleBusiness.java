@@ -31,9 +31,14 @@ public class ArticleBusiness {
 	 * @return Success.
 	 */
 	public boolean syncArticles() {
+		List<Article> articles;
 		try {
-			List<Article> articles = ApiSingleton.getApi().getArticles();
+			articles = ApiSingleton.getApi().getArticles();
+		} catch (Exception e) {
+			return false;//TODO Handle network error with properly message
+		}
 
+		try {
 			ActiveAndroid.beginTransaction();
 			new Delete().from(Article.class).execute();
 			for (Article it : articles)
