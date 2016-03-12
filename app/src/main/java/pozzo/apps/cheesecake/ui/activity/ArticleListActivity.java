@@ -1,32 +1,30 @@
-package pozzo.apps.cheesecake;
+package pozzo.apps.cheesecake.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-
-import pozzo.apps.cheesecake.dummy.DummyContent;
-
 import java.util.List;
 
+import pozzo.apps.cheesecake.R;
+import pozzo.apps.cheesecake.dummy.DummyContent;
+import pozzo.apps.cheesecake.ui.fragment.ArticleDetailFragment;
+
 /**
- * An activity representing a list of Articles. This activity
- * has different presentations for handset and tablet-size devices. On
- * handsets, the activity presents a list of items, which when touched,
- * lead to a {@link ArticleDetailActivity} representing
- * item details. On tablets, the activity presents the list of items and
- * item details side-by-side using two vertical panes.
+ * List all our articles.
+ *
+ * @author Luiz Gustavo Pozzo
+ * @since 2016-03-12
  */
 public class ArticleListActivity extends AppCompatActivity {
 

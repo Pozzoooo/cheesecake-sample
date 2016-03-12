@@ -6,10 +6,11 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:name=".core.App"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ArticleListActivity"
+            android:name=".ui.activity.ArticleListActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -19,13 +20,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ArticleDetailActivity"
+            android:name=".ui.activity.ArticleDetailActivity"
             android:label="@string/title_article_detail"
-            android:parentActivityName=".ArticleListActivity"
+            android:parentActivityName=".ui.activity.ArticleListActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="pozzo.apps.cheesecake.ArticleListActivity"/>
+                android:value=".ui.activity.ArticleListActivity"/>
         </activity>
     </application>
 

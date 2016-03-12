@@ -1,21 +1,22 @@
-package pozzo.apps.cheesecake;
+package pozzo.apps.cheesecake.ui.fragment;
 
 import android.app.Activity;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import pozzo.apps.cheesecake.R;
 import pozzo.apps.cheesecake.dummy.DummyContent;
 
 /**
- * A fragment representing a single Article detail screen.
- * This fragment is either contained in a {@link ArticleListActivity}
- * in two-pane mode (on tablets) or a {@link ArticleDetailActivity}
- * on handsets.
+ * This is show an article detail.
+ *
+ * @author Luiz Gustavo Pozzo
+ * @since 2016-03-12
  */
 public class ArticleDetailFragment extends Fragment {
 	/**
