@@ -7,4 +7,7 @@
 
     <!--Titles-->
     <string name="title_articleDetail">Article Detail</string>
+
+    <!--Error-->
+    <string name="error_syncFailed">Error during sync process</string>
 </resources>

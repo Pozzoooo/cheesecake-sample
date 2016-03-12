@@ -21,13 +21,13 @@ public class App extends Application {
 	public void onCreate() {
 		super.onCreate();
 
-		//Inicializamos nosso tracker de erro
+		//Init our bug tracker
 		Mint.initAndStartSession(this, "950a2ed0");
 
-		//Base de dados pela ActiveAndroid
+		//Database
 		ActiveAndroid.initialize(this);
 
-		//Configuracao de nosso carregamento de imagem
+		//Load and cache images
 		DisplayImageOptions options = new DisplayImageOptions.Builder()
 				.cacheInMemory(true).cacheOnDisc(true)
 				.imageScaleType(ImageScaleType.IN_SAMPLE_INT)

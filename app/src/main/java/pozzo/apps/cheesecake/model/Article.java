@@ -22,8 +22,8 @@ public class Article extends BaseModel {
 	@Column(name = "website")
 	private String website;
 
-	@SerializedName("author")
-	@Column(name = "author")
+	@SerializedName("authors")
+	@Column(name = "authors")
 	private String authors;
 
 	@SerializedName("date")
