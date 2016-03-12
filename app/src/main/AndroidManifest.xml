@@ -9,6 +9,16 @@
         android:name=".core.App"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="AA_DB_NAME"
+            android:value="cheese.db"/>
+        <meta-data
+            android:name="AA_DB_VERSION"
+            android:value="1"/>
+        <meta-data
+            android:name="AA_MODELS"
+            android:value="pozzo.apps.cheesecake.model.Article"/>
+
         <activity
             android:name=".ui.activity.ArticleListActivity"
             android:label="@string/app_name"
