@@ -1,39 +1,51 @@
-<android.support.v4.widget.SwipeRefreshLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/srRefresh"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:baselineAligned="false"
+    android:divider="?android:attr/dividerHorizontal"
+    android:orientation="horizontal"
+    android:showDividers="middle"
+    tools:context=".ui.activity.ArticleListActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <FrameLayout
+        android:layout_width="@dimen/item_width"
+        android:layout_height="match_parent">
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/article_list"
+                android:name="pozzo.apps.cheesecake.ArticleListFragment"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                app:layoutManager="LinearLayoutManager"
+                tools:context=".ui.activity.ArticleListActivity"
+                tools:listitem="@layout/adapter_article"/>
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+        <TextView
+            android:id="@android:id/empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/warning_noData"
+            android:visibility="gone"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/vgArticleDetails"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:baselineAligned="false"
-        android:divider="?android:attr/dividerHorizontal"
-        android:orientation="horizontal"
-        android:showDividers="middle"
-        tools:context=".ui.activity.ArticleListActivity">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/article_list"
-            android:name="pozzo.apps.cheesecake.ArticleListFragment"
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="@dimen/item_width"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            app:layoutManager="LinearLayoutManager"
-            tools:context=".ui.activity.ArticleListActivity"
-            tools:listitem="@layout/adapter_article"/>
-
-        <FrameLayout
-            android:id="@+id/vgArticleDetails"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3"/>
-    </LinearLayout>
-</android.support.v4.widget.SwipeRefreshLayout>
+        android:layout_weight="3"/>
+</LinearLayout>

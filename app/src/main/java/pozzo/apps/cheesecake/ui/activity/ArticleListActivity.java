@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -37,6 +38,7 @@ public class ArticleListActivity extends AppCompatActivity {
 
 	private RecyclerView recyclerView;
 	private SwipeRefreshLayout srRefresh;
+	private TextView lEmpty;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,7 @@ public class ArticleListActivity extends AppCompatActivity {
 
 		recyclerView = (RecyclerView) findViewById(R.id.article_list);
 		srRefresh = (SwipeRefreshLayout) findViewById(R.id.srRefresh);
+		lEmpty = (TextView) findViewById(android.R.id.empty);
 		srRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 			@Override
 			public void onRefresh() {
@@ -88,11 +91,14 @@ public class ArticleListActivity extends AppCompatActivity {
 
 			@Override
 			protected void onPostExecute(List<Article> articles) {
-				if(articles == null || articles.isEmpty())
+				if(articles == null || articles.isEmpty()) {
+					lEmpty.setVisibility(View.VISIBLE);
 					refresh();
-				else
+				} else {
+					lEmpty.setVisibility(View.GONE);
 					recyclerView.setAdapter(new ArticleAdapter(
 							articles, isTwoPanels ? showDetailsOnSide : openDetailsActivity));
+				}
 			}
 		}.execute();
 	}
@@ -121,6 +127,7 @@ public class ArticleListActivity extends AppCompatActivity {
 				if(aBoolean) {
 					setupRecyclerView();
 				} else {
+					//TODO I could add a connection trigger...
 					Toast.makeText(ArticleListActivity.this,
 							R.string.error_syncFailed, Toast.LENGTH_SHORT).show();
 				}
