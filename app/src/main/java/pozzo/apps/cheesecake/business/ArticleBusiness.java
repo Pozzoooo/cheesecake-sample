@@ -40,6 +40,7 @@ public class ArticleBusiness {
 
 		try {
 			ActiveAndroid.beginTransaction();
+			//TODO Bad way to sync.. you just lost all you "readAt" data =(
 			new Delete().from(Article.class).execute();
 			for (Article it : articles)
 				it.save();

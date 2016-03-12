@@ -1,7 +1,5 @@
 package pozzo.apps.cheesecake.ui.adapter;
 
-import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +13,6 @@ import java.util.List;
 
 import pozzo.apps.cheesecake.R;
 import pozzo.apps.cheesecake.model.Article;
-import pozzo.apps.cheesecake.ui.activity.ArticleDetailActivity;
-import pozzo.apps.cheesecake.ui.fragment.ArticleDetailFragment;
 
 /**
  * Adapter to show Articles in a list.
@@ -26,11 +22,11 @@ import pozzo.apps.cheesecake.ui.fragment.ArticleDetailFragment;
  */
 public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHolder> {
 	private List<Article> articles;
-	private Context context;
+	private View.OnClickListener onArticleClick;
 
-	public ArticleAdapter(List<Article> articles, Context context) {
+	public ArticleAdapter(List<Article> articles, View.OnClickListener onArticleClick) {
 		this.articles = articles;
-		this.context = context;
+		this.onArticleClick = onArticleClick;
 
 	}
 
@@ -79,20 +75,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
 			eDate = (TextView) itemView.findViewById(R.id.eDate);
 			iImage = (ImageView) itemView.findViewById(R.id.iImage);
 
-			cardArticle.setOnClickListener(onItemClick);
+			cardArticle.setOnClickListener(onArticleClick);
 		}
 	}
-
-	/**
-	 * User wants to know more about an item.
-	 */
-	private View.OnClickListener onItemClick = new View.OnClickListener() {
-		@Override
-		public void onClick(View v) {
-			Article article = (Article) v.getTag();
-			Intent intent = new Intent(context, ArticleDetailActivity.class);
-			intent.putExtra(ArticleDetailFragment.PARAM_ARTICLE, article);
-			context.startActivity(intent);
-		}
-	};
 }

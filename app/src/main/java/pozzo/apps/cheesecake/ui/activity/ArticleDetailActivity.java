@@ -46,7 +46,7 @@ public class ArticleDetailActivity extends AppCompatActivity {
 			ArticleDetailFragment fragment = new ArticleDetailFragment();
 			fragment.setArguments(arguments);
 			getSupportFragmentManager().beginTransaction()
-					.add(R.id.article_detail_container, fragment)
+					.add(R.id.vgArticleDetails, fragment)
 					.commit();
 		}
 

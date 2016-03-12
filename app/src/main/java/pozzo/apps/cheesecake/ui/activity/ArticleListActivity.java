@@ -1,11 +1,14 @@
 package pozzo.apps.cheesecake.ui.activity;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import java.util.List;
@@ -14,6 +17,7 @@ import pozzo.apps.cheesecake.R;
 import pozzo.apps.cheesecake.business.ArticleBusiness;
 import pozzo.apps.cheesecake.model.Article;
 import pozzo.apps.cheesecake.ui.adapter.ArticleAdapter;
+import pozzo.apps.cheesecake.ui.fragment.ArticleDetailFragment;
 
 /**
  * List all our articles.
@@ -27,9 +31,10 @@ public class ArticleListActivity extends AppCompatActivity {
 	 * Whether or not the activity is in two-pane mode, i.e. running on a tablet
 	 * device.
 	 */
-	private boolean mTwoPane;
+	private boolean isTwoPanels;
 
 	private ArticleBusiness articleBusiness;
+
 	private RecyclerView recyclerView;
 	private SwipeRefreshLayout srRefresh;
 
@@ -54,12 +59,13 @@ public class ArticleListActivity extends AppCompatActivity {
 			}
 		});
 
-		if (findViewById(R.id.article_detail_container) != null) {
+		ViewGroup articleDetails = (ViewGroup) findViewById(R.id.vgArticleDetails);
+		if (articleDetails != null) {
 			// The detail container view will be present only in the
 			// large-screen layouts (res/values-w900dp).
 			// If this view is present, then the
 			// activity should be in two-pane mode.
-			mTwoPane = true;
+			isTwoPanels = true;
 		}
 	}
 
@@ -85,7 +91,8 @@ public class ArticleListActivity extends AppCompatActivity {
 				if(articles == null || articles.isEmpty())
 					refresh();
 				else
-					recyclerView.setAdapter(new ArticleAdapter(articles, ArticleListActivity.this));
+					recyclerView.setAdapter(new ArticleAdapter(
+							articles, isTwoPanels ? showDetailsOnSide : openDetailsActivity));
 			}
 		}.execute();
 	}
@@ -129,4 +136,36 @@ public class ArticleListActivity extends AppCompatActivity {
 	private void setIsRefreshing(boolean state) {
 		srRefresh.setRefreshing(state);
 	}
+
+	/**
+	 * Shows article details on the side panel.
+ 	 */
+	private View.OnClickListener showDetailsOnSide = new View.OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			Article article = (Article) v.getTag();
+
+			Bundle arguments = new Bundle();
+			arguments.putParcelable(ArticleDetailFragment.PARAM_ARTICLE, article);
+			ArticleDetailFragment fragment = new ArticleDetailFragment();
+			fragment.setArguments(arguments);
+			getSupportFragmentManager().beginTransaction()
+					.replace(R.id.vgArticleDetails, fragment)
+					.commit();
+		}
+	};
+
+	/**
+	 * User wants to know more about an item.
+	 */
+	private View.OnClickListener openDetailsActivity = new View.OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			Article article = (Article) v.getTag();
+			Intent intent = new Intent(ArticleListActivity.this, ArticleDetailActivity.class);
+			intent.putExtra(ArticleDetailFragment.PARAM_ARTICLE, article);
+			startActivity(intent);
+		}
+	};
+
 }
